@@ -11,6 +11,7 @@ function Checkout() {
   const [city, setCity] = useState("");
   const [pincode, setPincode] = useState("");
 
+  // Total
   const total = cartItems.reduce(
     (sum: number, item: any) =>
       sum +
@@ -32,24 +33,24 @@ function Checkout() {
     const message = `
 New Order - SKML Dry Fruits
 
-Name: ${name}
+Customer Name: ${name}
 Phone: ${phone}
 
-Address:
+Delivery Address:
 ${address}
 
 City: ${city}
 Pincode: ${pincode}
 
-Order Items:
+Products:
 ${orderItems}
 
-Total: ₹${total}
+Total Amount: ₹${total}
 
 Payment Status: PAID
 `;
 
-    const whatsappUrl = `https://wa.me/919866841672?text=${encodeURIComponent(
+    const whatsappUrl = `https://wa.me/918074643922?text=${encodeURIComponent(
       message
     )}`;
 
@@ -120,6 +121,29 @@ Payment Status: PAID
               className="w-full p-4 border rounded-2xl"
             />
           </div>
+
+          {/* Store Address */}
+          <div className="mt-10 bg-[#f8f8f8] p-6 rounded-2xl">
+            <h3 className="text-2xl font-bold text-green-950 mb-4">
+              Store Address
+            </h3>
+
+            <p className="text-gray-700 leading-8">
+              SKML Dry Fruits & General Stores
+              <br />
+              3, Nethaji Nagar
+              <br />
+              Mahalaxmi Nagar
+              <br />
+              Pendurthi
+              <br />
+              Andhra Pradesh - 531173
+            </p>
+
+            <p className="mt-4 font-bold text-green-950">
+              Contact: 8074643922
+            </p>
+          </div>
         </div>
 
         {/* Order Summary */}
@@ -154,7 +178,7 @@ Payment Status: PAID
           </div>
 
           {/* Total */}
-          <div className="mt-8 flex justify-between text-3xl font-bold">
+          <div className="mt-8 border-t pt-4 flex justify-between text-3xl font-bold">
             <span>Total</span>
 
             <span>₹{total}</span>
@@ -185,34 +209,42 @@ Payment Status: PAID
                 </p>
               </div>
 
-              {/* UPI Apps */}
+              {/* UPI Buttons */}
               <div className="grid grid-cols-2 gap-4 mt-8">
-                {/* PhonePe */}
-                <a href={upiLink}>
-                  <div className="bg-white rounded-2xl py-4 text-center font-bold shadow hover:scale-105 transition cursor-pointer">
+                <a
+                  href={upiLink}
+                  target="_blank"
+                >
+                  <button className="w-full bg-[#5f259f] text-white rounded-2xl py-4 font-bold">
                     PhonePe
-                  </div>
+                  </button>
                 </a>
 
-                {/* Google Pay */}
-                <a href={upiLink}>
-                  <div className="bg-white rounded-2xl py-4 text-center font-bold shadow hover:scale-105 transition cursor-pointer">
+                <a
+                  href={upiLink}
+                  target="_blank"
+                >
+                  <button className="w-full bg-white border-2 rounded-2xl py-4 font-bold">
                     Google Pay
-                  </div>
+                  </button>
                 </a>
 
-                {/* Paytm */}
-                <a href={upiLink}>
-                  <div className="bg-white rounded-2xl py-4 text-center font-bold shadow hover:scale-105 transition cursor-pointer">
+                <a
+                  href={upiLink}
+                  target="_blank"
+                >
+                  <button className="w-full bg-[#00b9f1] text-white rounded-2xl py-4 font-bold">
                     Paytm
-                  </div>
+                  </button>
                 </a>
 
-                {/* BHIM */}
-                <a href={upiLink}>
-                  <div className="bg-white rounded-2xl py-4 text-center font-bold shadow hover:scale-105 transition cursor-pointer">
+                <a
+                  href={upiLink}
+                  target="_blank"
+                >
+                  <button className="w-full bg-[#1d3f91] text-white rounded-2xl py-4 font-bold">
                     BHIM UPI
-                  </div>
+                  </button>
                 </a>
               </div>
 
@@ -224,7 +256,7 @@ Payment Status: PAID
                       "Debit/Credit card payments coming soon with Razorpay integration"
                     )
                   }
-                  className="w-full bg-black text-white py-4 rounded-2xl text-lg font-bold hover:scale-105 transition"
+                  className="w-full bg-black text-white py-4 rounded-2xl text-lg font-bold"
                 >
                   Pay Using Debit/Credit Card
                 </button>
@@ -233,7 +265,7 @@ Payment Status: PAID
               {/* Paid Button */}
               <button
                 onClick={placeOrder}
-                className="w-full mt-8 bg-green-950 text-white py-4 rounded-2xl text-lg font-bold hover:scale-105 transition"
+                className="w-full mt-8 bg-green-950 text-white py-4 rounded-2xl text-lg font-bold"
               >
                 I Have Paid
               </button>

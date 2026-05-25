@@ -11,7 +11,6 @@ import Home from "@/pages/home";
 import Shop from "@/pages/shop";
 import Cart from "@/pages/cart";
 import Wholesale from "@/pages/wholesale";
-import Offers from "@/pages/offers";
 import Contact from "@/pages/contact";
 import Login from "@/pages/Login";
 import Signup from "@/pages/Signup";
@@ -43,8 +42,6 @@ function Router() {
       <Route path="/checkout" component={Checkout} />
 
       <Route path="/wholesale" component={Wholesale} />
-
-      <Route path="/offers" component={Offers} />
 
       <Route path="/contact" component={Contact} />
 
