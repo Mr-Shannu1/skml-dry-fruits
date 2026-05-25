@@ -1,5 +1,7 @@
 import { useState } from "react";
+
 import { useCart } from "@/context/cart-context";
+
 import paymentQR from "@/assets/products/payment-qr.jpg";
 
 function Checkout() {
@@ -7,9 +9,14 @@ function Checkout() {
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [pincode, setPincode] = useState("");
+  const [address, setAddress] =
+    useState("");
+
+  const [city, setCity] =
+    useState("");
+
+  const [pincode, setPincode] =
+    useState("");
 
   // Total
   const total = cartItems.reduce(
@@ -26,7 +33,9 @@ function Checkout() {
     const orderItems = cartItems
       .map(
         (item: any) =>
-          `${item.name} x ${item.quantity || 1}`
+          `${item.name} (${item.weight}) x ${
+            item.quantity || 1
+          }`
       )
       .join("\n");
 
@@ -54,23 +63,35 @@ Payment Status: PAID
       message
     )}`;
 
-    window.open(whatsappUrl, "_blank");
+    // Open WhatsApp
+    window.open(
+      whatsappUrl,
+      "_blank"
+    );
+
+    // Redirect Success Page
+    window.location.href =
+      "/order-success";
   };
 
   return (
     <div className="min-h-screen bg-[#FFF8EE] p-8">
+
       <h1 className="text-5xl font-bold text-green-950 text-center mb-12">
         Checkout
       </h1>
 
       <div className="grid md:grid-cols-2 gap-10 max-w-7xl mx-auto">
+
         {/* Delivery Details */}
         <div className="bg-white p-8 rounded-3xl shadow-xl">
+
           <h2 className="text-3xl font-bold text-green-950 mb-8">
             Delivery Details
           </h2>
 
           <div className="space-y-5">
+
             <input
               type="text"
               placeholder="Full Name"
@@ -120,16 +141,19 @@ Payment Status: PAID
               }
               className="w-full p-4 border rounded-2xl"
             />
+
           </div>
 
           {/* Store Address */}
           <div className="mt-10 bg-[#f8f8f8] p-6 rounded-2xl">
+
             <h3 className="text-2xl font-bold text-green-950 mb-4">
               Store Address
             </h3>
 
             <p className="text-gray-700 leading-8">
-              SKML Dry Fruits & General Stores
+              SKML Dry Fruits &
+              General Stores
               <br />
               3, Nethaji Nagar
               <br />
@@ -137,61 +161,86 @@ Payment Status: PAID
               <br />
               Pendurthi
               <br />
-              Andhra Pradesh - 531173
+              Andhra Pradesh -
+              531173
             </p>
 
             <p className="mt-4 font-bold text-green-950">
               Contact: 8074643922
             </p>
+
           </div>
+
         </div>
 
         {/* Order Summary */}
         <div className="bg-white p-8 rounded-3xl shadow-xl">
+
           <h2 className="text-3xl font-bold text-green-950 mb-8">
             Order Summary
           </h2>
 
           <div className="space-y-5">
-            {cartItems.map((item: any, index: number) => (
-              <div
-                key={index}
-                className="flex items-center justify-between border-b pb-4"
-              >
-                <div>
-                  <h3 className="font-bold text-lg">
-                    {item.name}
-                  </h3>
 
-                  <p className="text-gray-500">
-                    Qty: {item.quantity || 1}
+            {cartItems.map(
+              (item: any, index: number) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between border-b pb-4"
+                >
+
+                  <div>
+
+                    <h3 className="font-bold text-lg">
+                      {item.name}
+                    </h3>
+
+                    <p className="text-gray-500">
+                      {item.weight}
+                    </p>
+
+                    <p className="text-gray-500">
+                      Qty:{" "}
+                      {item.quantity || 1}
+                    </p>
+
+                  </div>
+
+                  <p className="font-bold text-xl">
+                    ₹
+                    {Number(
+                      item.price || 0
+                    ) *
+                      Number(
+                        item.quantity || 1
+                      )}
                   </p>
-                </div>
 
-                <p className="font-bold text-xl">
-                  ₹
-                  {Number(item.price || 0) *
-                    Number(item.quantity || 1)}
-                </p>
-              </div>
-            ))}
+                </div>
+              )
+            )}
+
           </div>
 
           {/* Total */}
           <div className="mt-8 border-t pt-4 flex justify-between text-3xl font-bold">
+
             <span>Total</span>
 
             <span>₹{total}</span>
+
           </div>
 
           {/* Payment Section */}
           <div className="mt-10">
+
             <h3 className="text-2xl font-bold text-center text-green-950 mb-6">
               Pay Using Any UPI App
             </h3>
 
-            {/* QR */}
             <div className="bg-[#f8f8f8] rounded-3xl p-6">
+
+              {/* QR */}
               <img
                 src={paymentQR}
                 alt="UPI QR"
@@ -200,6 +249,7 @@ Payment Status: PAID
 
               {/* UPI ID */}
               <div className="mt-6 text-center">
+
                 <p className="text-lg font-semibold">
                   UPI ID:
                 </p>
@@ -207,10 +257,12 @@ Payment Status: PAID
                 <p className="text-green-950 font-bold break-all">
                   SBIBHIM.INSTANT41339121095464268@sbipay
                 </p>
+
               </div>
 
-              {/* UPI Buttons */}
+              {/* Payment Buttons */}
               <div className="grid grid-cols-2 gap-4 mt-8">
+
                 <a
                   href={upiLink}
                   target="_blank"
@@ -246,10 +298,12 @@ Payment Status: PAID
                     BHIM UPI
                   </button>
                 </a>
+
               </div>
 
               {/* Card Payment */}
               <div className="mt-8">
+
                 <button
                   onClick={() =>
                     alert(
@@ -260,19 +314,25 @@ Payment Status: PAID
                 >
                   Pay Using Debit/Credit Card
                 </button>
+
               </div>
 
-              {/* Paid Button */}
+              {/* Order Button */}
               <button
                 onClick={placeOrder}
                 className="w-full mt-8 bg-green-950 text-white py-4 rounded-2xl text-lg font-bold"
               >
                 I Have Paid
               </button>
+
             </div>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
   );
 }

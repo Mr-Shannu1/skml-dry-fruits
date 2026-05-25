@@ -7,103 +7,125 @@ import {
 
 const CartContext = createContext<any>(null);
 
-export function CartProvider({ children }: any) {
-  const [cartItems, setCartItems] = useState<any[]>([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+export function CartProvider({
+  children,
+}: any) {
+  const [cartItems, setCartItems] =
+    useState<any[]>([]);
 
-  // Load cart
+  const [isCartOpen, setIsCartOpen] =
+    useState(false);
+
+  // Load cart from localStorage
   useEffect(() => {
-    const savedCart =
-      localStorage.getItem("cartItems");
+    const storedCart =
+      localStorage.getItem("cart");
 
-    if (savedCart) {
-      setCartItems(JSON.parse(savedCart));
+    if (storedCart) {
+      setCartItems(
+        JSON.parse(storedCart)
+      );
     }
   }, []);
 
-  // Save cart
+  // Save cart to localStorage
   useEffect(() => {
     localStorage.setItem(
-      "cartItems",
+      "cart",
       JSON.stringify(cartItems)
     );
   }, [cartItems]);
 
   // Add To Cart
   const addToCart = (product: any) => {
-    setCartItems((prev) => {
-      const existing = prev.find(
-        (item) => item.id === product.id
+    const existingItem =
+      cartItems.find(
+        (item: any) =>
+          item.id === product.id
       );
 
-      if (existing) {
-        return prev.map((item) =>
+    if (existingItem) {
+      const updatedCart =
+        cartItems.map((item: any) =>
           item.id === product.id
             ? {
                 ...item,
                 quantity:
-                  (item.quantity || 1) + 1,
+                  item.quantity + 1,
               }
             : item
         );
-      }
 
-      return [
-        ...prev,
+      setCartItems(updatedCart);
+    } else {
+      setCartItems([
+        ...cartItems,
         {
           ...product,
           quantity: 1,
         },
-      ];
-    });
-
-    // Popup
-    alert(`${product.name} added to cart`);
+      ]);
+    }
   };
 
-  // Increase quantity
-  const increaseQuantity = (id: string) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
+  // Increase Quantity
+  const increaseQuantity = (
+    id: string
+  ) => {
+    const updatedCart =
+      cartItems.map((item: any) =>
         item.id === id
           ? {
               ...item,
               quantity:
-                (item.quantity || 1) + 1,
+                item.quantity + 1,
             }
           : item
-      )
-    );
+      );
+
+    setCartItems(updatedCart);
   };
 
-  // Decrease quantity
-  const decreaseQuantity = (id: string) => {
-    setCartItems((prev) =>
-      prev
-        .map((item) =>
+  // Decrease Quantity
+  const decreaseQuantity = (
+    id: string
+  ) => {
+    const updatedCart =
+      cartItems
+        .map((item: any) =>
           item.id === id
             ? {
                 ...item,
                 quantity:
-                  (item.quantity || 1) - 1,
+                  item.quantity - 1,
               }
             : item
         )
-        .filter((item) => item.quantity > 0)
-    );
+        .filter(
+          (item: any) =>
+            item.quantity > 0
+        );
+
+    setCartItems(updatedCart);
   };
 
-  // Remove only one product
-  const removeFromCart = (id: string) => {
-    setCartItems((prev) =>
-      prev.filter((item) => item.id !== id)
-    );
+  // Remove Item
+  const removeItem = (id: string) => {
+    const updatedCart =
+      cartItems.filter(
+        (item: any) =>
+          item.id !== id
+      );
+
+    setCartItems(updatedCart);
   };
 
+  // Open Cart
   const openCart = () => {
     setIsCartOpen(true);
   };
 
+  // Close Cart
   const closeCart = () => {
     setIsCartOpen(false);
   };
@@ -112,10 +134,11 @@ export function CartProvider({ children }: any) {
     <CartContext.Provider
       value={{
         cartItems,
+        setCartItems,
         addToCart,
         increaseQuantity,
         decreaseQuantity,
-        removeFromCart,
+        removeItem,
         isCartOpen,
         openCart,
         closeCart,

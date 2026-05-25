@@ -15,6 +15,8 @@ import {
   Heart,
 } from "lucide-react";
 
+import toast from "react-hot-toast";
+
 export default function Shop() {
   const [products, setProducts] = useState<any[]>([]);
   const [search, setSearch] = useState("");
@@ -77,10 +79,12 @@ export default function Shop() {
 
   return (
     <div className="min-h-screen bg-[#faf7f0]">
+
       <Navbar />
 
       {/* Header */}
       <section className="bg-[#1a3d2b] text-white py-20">
+
         <div className="max-w-7xl mx-auto px-6 text-center">
 
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
@@ -93,6 +97,7 @@ export default function Shop() {
           </p>
 
         </div>
+
       </section>
 
       {/* Search + Filters */}
@@ -158,8 +163,16 @@ export default function Shop() {
                       removeFromWishlist(
                         product.id
                       );
+
+                      toast.error(
+                        "Removed from wishlist"
+                      );
                     } else {
                       addToWishlist(product);
+
+                      toast.success(
+                        "Added to wishlist ❤️"
+                      );
                     }
                   }}
                   className="absolute top-4 right-4 z-20 bg-white p-3 rounded-full shadow-lg hover:scale-110 transition"
@@ -191,27 +204,37 @@ export default function Shop() {
                     {product.description}
                   </p>
 
+                  {/* Price + Weight */}
                   <div className="flex items-center justify-between mt-5">
 
                     <span className="text-xl font-bold">
                       ₹{product.price}
                     </span>
 
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-
-                        addToCart({
-                          ...product,
-                          quantity: 1,
-                        });
-                      }}
-                      className="bg-green-950 text-white px-5 py-2 rounded-xl hover:scale-105 transition"
-                    >
-                      Add To Cart
-                    </button>
+                    <span className="bg-green-100 text-green-900 px-4 py-2 rounded-full text-sm font-bold">
+                      {product.weight}
+                    </span>
 
                   </div>
+
+                  {/* Add To Cart */}
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+
+                      addToCart({
+                        ...product,
+                        quantity: 1,
+                      });
+
+                      toast.success(
+                        "Added to cart 🛒"
+                      );
+                    }}
+                    className="w-full mt-6 bg-green-950 text-white px-5 py-3 rounded-2xl hover:scale-105 transition"
+                  >
+                    Add To Cart
+                  </button>
 
                 </div>
 
@@ -224,6 +247,7 @@ export default function Shop() {
 
         {/* No Products */}
         {filteredProducts.length === 0 && (
+
           <div className="text-center py-20">
 
             <h2 className="text-4xl font-bold text-gray-400">
@@ -231,11 +255,13 @@ export default function Shop() {
             </h2>
 
           </div>
+
         )}
 
       </section>
 
       <Footer />
+
     </div>
   );
 }
