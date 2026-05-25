@@ -1,110 +1,183 @@
 import { Link } from "wouter";
-import { ShoppingCart, Menu, X, Phone, MapPin } from "lucide-react";
-import { useCart } from "@/context/cart-context";
+
+import {
+  ShoppingCart,
+  Heart,
+  Menu,
+  X,
+} from "lucide-react";
+
 import { useState } from "react";
 
+import { useCart } from "@/context/cart-context";
+import { useWishlist } from "@/context/wishlist-context";
+
 export function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] =
+    useState(false);
+
   const { cartItems } = useCart();
 
-  const totalItems = cartItems.length;
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { wishlistItems } = useWishlist();
 
   const navLinks = [
-    { label: "Home", href: "/" },
-    { label: "Shop", href: "/shop" },
-    { label: "Wholesale", href: "/wholesale" },
-    { label: "Contact", href: "/contact" },
+    {
+      label: "Home",
+      href: "/",
+    },
+    {
+      label: "Shop",
+      href: "/shop",
+    },
+    {
+      label: "Contact",
+      href: "/contact",
+    },
+    {
+      label: "Wholesale",
+      href: "/wholesale",
+    },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex h-20 items-center justify-between">
+    <header className="sticky top-0 z-50 bg-white shadow-sm border-b">
+
+      <div className="max-w-7xl mx-auto px-6">
+
+        <div className="flex items-center justify-between h-20">
+
           {/* Logo */}
           <Link href="/">
-            <div className="flex flex-col cursor-pointer">
-              <span className="text-2xl font-bold text-green-950">
-                SKML
-              </span>
+            <div className="cursor-pointer">
 
-              <span className="text-xs tracking-[0.2em] text-yellow-600">
-                DRY FRUITS
-              </span>
+              <h1 className="text-3xl font-bold text-[#1a3d2b]">
+                SKML
+              </h1>
+
+              <p className="text-sm text-gray-500">
+                Dry Fruits & General Stores
+              </p>
+
             </div>
           </Link>
 
-          {/* Desktop Nav */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
+
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <span className="cursor-pointer text-sm font-medium hover:text-yellow-600 transition">
+              <Link
+                key={link.href}
+                href={link.href}
+              >
+                <span className="cursor-pointer font-semibold text-[#1a3d2b] hover:text-[#d4af37] transition">
                   {link.label}
                 </span>
               </Link>
             ))}
+
           </nav>
 
-          {/* Right Side */}
-          <div className="flex items-center gap-4">
-            {/* Location */}
-            <div className="hidden lg:flex items-center gap-2 text-sm text-gray-500">
-              <MapPin className="h-4 w-4 text-yellow-600" />
+          {/* Right Section */}
+          <div className="flex items-center gap-5">
 
-              <span>Visakhapatnam</span>
-            </div>
+            {/* Phone */}
+            <a
+              href="tel:8074643922"
+              className="hidden lg:block text-sm font-semibold text-[#1a3d2b]"
+            >
+              📞 8074643922
+            </a>
+
+            {/* Wishlist */}
+            <Link href="/wishlist">
+
+              <div className="relative cursor-pointer">
+
+                <Heart className="h-7 w-7 text-[#1a3d2b]" />
+
+                {wishlistItems.length > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                    {wishlistItems.length}
+                  </span>
+                )}
+
+              </div>
+
+            </Link>
 
             {/* Cart */}
             <Link href="/cart">
-              <div className="relative cursor-pointer p-2">
-                <ShoppingCart className="h-6 w-6 text-black" />
 
-                {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-yellow-500 text-black text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                    {totalItems}
+              <div className="relative cursor-pointer">
+
+                <ShoppingCart className="h-7 w-7 text-[#1a3d2b]" />
+
+                {cartItems.length > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-[#1a3d2b] text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                    {cartItems.length}
                   </span>
                 )}
+
               </div>
+
             </Link>
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden"
+              onClick={() =>
+                setMobileMenuOpen(
+                  !mobileMenuOpen
+                )
+              }
             >
-              {isMenuOpen ? (
-                <X className="h-6 w-6" />
+              {mobileMenuOpen ? (
+                <X className="h-7 w-7" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="h-7 w-7" />
               )}
             </button>
-          </div>
-        </div>
-      </div>
 
-      {/* Mobile Nav */}
-      {isMenuOpen && (
-        <div className="md:hidden border-t bg-white">
-          <nav className="flex flex-col p-4">
+          </div>
+
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+
+          <div className="md:hidden py-6 border-t space-y-5">
+
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <span
-                  className="py-3 border-b cursor-pointer"
-                  onClick={() => setIsMenuOpen(false)}
+              <Link
+                key={link.href}
+                href={link.href}
+              >
+
+                <div
+                  onClick={() =>
+                    setMobileMenuOpen(false)
+                  }
+                  className="block font-semibold text-[#1a3d2b] cursor-pointer"
                 >
                   {link.label}
-                </span>
+                </div>
+
               </Link>
             ))}
 
-            <div className="py-4 flex items-center gap-2 text-sm text-green-950">
-              <Phone className="h-4 w-4" />
+            <a
+              href="tel:8074643922"
+              className="block font-semibold text-[#1a3d2b]"
+            >
+              📞 8074643922
+            </a>
 
-              <span>+91 98765 43210</span>
-            </div>
-          </nav>
-        </div>
-      )}
+          </div>
+
+        )}
+
+      </div>
+
     </header>
   );
 }

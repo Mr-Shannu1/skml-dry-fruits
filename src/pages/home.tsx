@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import heroImage from "@/assets/products/hero-dryfruits.jpeg";
+
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { PremiumFeatures } from "@/components/premium-features";
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+
 import { Link } from "wouter";
+
 import {
   MapPin,
   Clock,
@@ -44,21 +48,22 @@ export default function Home() {
       <Navbar />
 
       <main className="flex-1">
+
         {/* Hero Section */}
         <section className="relative h-[85vh] min-h-[600px] flex items-center bg-primary overflow-hidden">
+
+          {/* Background */}
           <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-primary/40 z-10" />
 
             <img
-              src={
-                products[0]?.image ||
-                "https://images.unsplash.com/photo-1606923829579-0cb981a83e2c"
-              }
+              src={heroImage}
               alt="Luxury Dry Fruits"
               className="w-full h-full object-cover object-center"
             />
           </div>
 
+          {/* Content */}
           <div className="container mx-auto px-4 md:px-6 relative z-20">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -98,16 +103,6 @@ export default function Home() {
                     Shop Collection
                   </Button>
                 </Link>
-
-                <Link href="/offers">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-white/30 text-white hover:bg-white hover:text-primary rounded-full px-8 py-6 text-lg font-semibold bg-black/10"
-                  >
-                    View Festive Offers
-                  </Button>
-                </Link>
               </div>
             </motion.div>
           </div>
@@ -116,7 +111,9 @@ export default function Home() {
         {/* Features */}
         <section className="py-12 bg-card border-b border-border">
           <div className="container mx-auto px-4 md:px-6">
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
               <div className="flex flex-col items-center text-center p-4">
                 <div className="h-14 w-14 rounded-full bg-primary/5 flex items-center justify-center mb-4 text-primary">
                   <Clock className="h-7 w-7" />
@@ -172,6 +169,7 @@ export default function Home() {
                   Trusted in Visakhapatnam.
                 </p>
               </div>
+
             </div>
           </div>
         </section>
@@ -179,6 +177,7 @@ export default function Home() {
         {/* Products */}
         <section className="py-20 md:py-28 bg-[#faf7f0]">
           <div className="container mx-auto px-4 md:px-6">
+
             <div className="text-center mb-14">
               <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#1a3d2b] mb-4">
                 Premium Collections
@@ -190,46 +189,57 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
               {products.map((product: any) => (
-                <div
-                  key={product.id}
-                  className="bg-white rounded-3xl shadow-xl overflow-hidden"
-                >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-64 object-cover"
-                  />
+                <Link href={`/product/${product.id}`} key={product.id}>
 
-                  <div className="p-5">
-                    <h3 className="text-2xl font-bold text-green-950">
-                      {product.name}
-                    </h3>
+                  <div className="bg-white rounded-3xl shadow-xl overflow-hidden cursor-pointer hover:scale-105 transition-all duration-300">
 
-                    <p className="text-gray-600 mt-2 text-sm">
-                      {product.description}
-                    </p>
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-64 object-cover"
+                    />
 
-                    <div className="flex items-center justify-between mt-5">
-                      <span className="text-xl font-bold">
-                        ₹{product.price}
-                      </span>
+                    <div className="p-5">
 
-                      <button
-                        onClick={() =>
-                          addToCart({
-                            ...product,
-                            quantity: 1,
-                          })
-                        }
-                        className="bg-green-950 text-white px-5 py-2 rounded-xl"
-                      >
-                        Add To Cart
-                      </button>
+                      <h3 className="text-2xl font-bold text-green-950">
+                        {product.name}
+                      </h3>
+
+                      <p className="text-gray-600 mt-2 text-sm">
+                        {product.description}
+                      </p>
+
+                      <div className="flex items-center justify-between mt-5">
+
+                        <span className="text-xl font-bold">
+                          ₹{product.price}
+                        </span>
+
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+
+                            addToCart({
+                              ...product,
+                              quantity: 1,
+                            });
+                          }}
+                          className="bg-green-950 text-white px-5 py-2 rounded-xl hover:scale-105 transition"
+                        >
+                          Add To Cart
+                        </button>
+
+                      </div>
+
                     </div>
+
                   </div>
-                </div>
+
+                </Link>
               ))}
+
             </div>
 
             <div className="mt-12 flex justify-center">
@@ -241,6 +251,7 @@ export default function Home() {
                 </button>
               </Link>
             </div>
+
           </div>
         </section>
 
@@ -249,8 +260,11 @@ export default function Home() {
         {/* Wholesale Banner */}
         <section className="py-20 bg-primary text-white">
           <div className="container mx-auto px-4 md:px-6">
+
             <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+
               <div className="md:w-1/2">
+
                 <Badge className="bg-secondary/20 text-secondary border-secondary/50 mb-6 py-1.5 px-4 text-sm font-medium">
                   B2B & Wholesale
                 </Badge>
@@ -268,23 +282,26 @@ export default function Home() {
                     Request Bulk Quote
                   </Button>
                 </Link>
+
               </div>
 
               <div className="md:w-1/2 w-full">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-video">
+
                   <img
-                    src={
-                      products[1]?.image ||
-                      "https://images.unsplash.com/photo-1606923829579-0cb981a83e2c"
-                    }
+                    src={products[1]?.image || heroImage}
                     alt="Wholesale Dry Fruits"
                     className="w-full h-full object-cover"
                   />
+
                 </div>
               </div>
+
             </div>
+
           </div>
         </section>
+
       </main>
 
       <Footer />

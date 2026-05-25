@@ -4,6 +4,7 @@ import Checkout from "@/pages/checkout";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { MessageCircle } from "lucide-react";
+import ProductDetails from "@/pages/product-details";
 import { CartProvider } from "@/context/cart-context";
 import NotFound from "@/pages/not-found";
 
@@ -37,7 +38,7 @@ function Router() {
       <Route path="/" component={Home} />
 
       <Route path="/shop" component={Shop} />
-
+      <Route path="/product/:id" component={ProductDetails} />
       <Route path="/cart" component={Cart} />
       <Route path="/checkout" component={Checkout} />
 
