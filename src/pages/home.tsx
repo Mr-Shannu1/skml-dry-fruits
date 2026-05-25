@@ -34,12 +34,12 @@ export default function Home() {
 
       <Navbar />
 
-      {/* Hero Section */}
+      {/* HERO SECTION */}
       <section className="bg-[#003b1f] text-white py-20">
 
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-14 items-center">
 
-          {/* Left */}
+          {/* LEFT */}
           <div>
 
             <p className="bg-yellow-500 text-black inline-block px-5 py-2 rounded-full font-semibold mb-6">
@@ -47,41 +47,54 @@ export default function Home() {
             </p>
 
             <h1 className="text-6xl font-bold leading-tight">
+
               The True Taste
               <br />
+
               <span className="text-yellow-400">
                 of Luxury.
               </span>
+
             </h1>
 
             <p className="mt-8 text-xl text-gray-300 leading-9">
+
               Hand-selected premium dry fruits,
               artisan nuts and exotic spices.
+
             </p>
 
             <div className="flex gap-5 mt-10">
 
               <a href="/shop">
+
                 <button className="bg-yellow-500 hover:bg-yellow-400 text-black px-10 py-4 rounded-2xl text-lg font-bold transition">
+
                   Shop Collection
+
                 </button>
+
               </a>
 
               <a href="/contact">
+
                 <button className="border border-white px-10 py-4 rounded-2xl text-lg font-bold hover:bg-white hover:text-black transition">
+
                   Contact Us
+
                 </button>
+
               </a>
 
             </div>
 
           </div>
 
-          {/* Right Hero Image */}
+          {/* RIGHT IMAGE */}
           <div>
 
             <img
-              src="https://images.unsplash.com/photo-1606923829579-0cb981a83e2f?q=80&w=1200&auto=format&fit=crop"
+              src="/products/hero-dryfruits.jpg"
               alt="Dry Fruits"
               className="w-full h-[500px] object-cover rounded-3xl shadow-2xl"
             />
@@ -92,7 +105,7 @@ export default function Home() {
 
       </section>
 
-      {/* Featured Products */}
+      {/* FEATURED PRODUCTS */}
       <section className="max-w-7xl mx-auto px-6 py-20">
 
         <div className="text-center mb-16">
@@ -107,7 +120,7 @@ export default function Home() {
 
         </div>
 
-        {/* Products Grid */}
+        {/* PRODUCTS GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
           {products.map((product: any) => (
@@ -117,27 +130,25 @@ export default function Home() {
               className="bg-white rounded-3xl overflow-hidden shadow-xl hover:scale-105 transition-all duration-300"
             >
 
-              {/* Product Image */}
+              {/* IMAGE */}
               <img
                 src={product.image}
                 alt={product.name}
                 className="w-full h-72 object-cover"
               />
 
-              {/* Product Details */}
+              {/* CONTENT */}
               <div className="p-6">
 
-                {/* Product Name */}
                 <h3 className="text-2xl font-bold text-[#0f3d2e]">
                   {product.name}
                 </h3>
 
-                {/* Description */}
                 <p className="text-gray-600 mt-3">
                   {product.description}
                 </p>
 
-                {/* Price + Weight */}
+                {/* PRICE + WEIGHT */}
                 <div className="flex items-center justify-between mt-5">
 
                   <p className="text-3xl font-bold text-[#0f3d2e]">
@@ -150,9 +161,10 @@ export default function Home() {
 
                 </div>
 
-                {/* Add To Cart */}
+                {/* BUTTON */}
                 <button
                   onClick={() => {
+
                     addToCart({
                       ...product,
                       quantity: 1,
@@ -161,6 +173,7 @@ export default function Home() {
                     toast.success(
                       "Added to cart 🛒"
                     );
+
                   }}
                   className="w-full mt-6 bg-[#003b1f] text-white py-4 rounded-2xl hover:scale-105 transition"
                 >
@@ -177,8 +190,8 @@ export default function Home() {
 
       </section>
 
-      {/* Why Choose Us */}
-      <section className="bg-[#003b1f] text-white py-20 mt-20">
+      {/* WHY CHOOSE US */}
+      <section className="bg-[#003b1f] text-white py-20">
 
         <div className="max-w-7xl mx-auto px-6">
 
@@ -203,8 +216,7 @@ export default function Home() {
               </h3>
 
               <p className="text-gray-300 text-lg">
-                Handpicked dry fruits sourced
-                directly from trusted farms.
+                Handpicked dry fruits sourced directly from trusted farms.
               </p>
 
             </div>
@@ -216,8 +228,7 @@ export default function Home() {
               </h3>
 
               <p className="text-gray-300 text-lg">
-                Same-day delivery available in
-                Visakhapatnam.
+                Same-day delivery available in Visakhapatnam.
               </p>
 
             </div>
@@ -229,13 +240,42 @@ export default function Home() {
               </h3>
 
               <p className="text-gray-300 text-lg">
-                Best premium dry fruits at
-                wholesale prices.
+                Best premium dry fruits at wholesale prices.
               </p>
 
             </div>
 
           </div>
+
+        </div>
+
+      </section>
+
+      {/* WHOLESALE SECTION */}
+      <section className="py-24 bg-[#faf7f0]">
+
+        <div className="max-w-7xl mx-auto px-6 text-center">
+
+          <h2 className="text-5xl font-bold text-[#0f3d2e]">
+            Wholesale & Bulk Orders
+          </h2>
+
+          <p className="text-gray-600 text-xl mt-6 max-w-3xl mx-auto leading-9">
+
+            Looking for corporate gifting, reselling or bulk purchases?
+            Contact SKML Dry Fruits for the best wholesale pricing.
+
+          </p>
+
+          <a href="/wholesale">
+
+            <button className="mt-10 bg-[#003b1f] text-white px-12 py-5 rounded-2xl text-xl font-bold hover:scale-105 transition">
+
+              Request Bulk Quote
+
+            </button>
+
+          </a>
 
         </div>
 
