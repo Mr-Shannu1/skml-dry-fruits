@@ -47,9 +47,10 @@ export default function Contact() {
                   <div>
                     <h3 className="font-bold text-lg mb-1">Our Boutique</h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      SKML Dry Fruits,<br />
-                      Dwaraka Nagar Main Road,<br />
-                      Visakhapatnam, Andhra Pradesh 530016
+                      SKML Dry Fruits & General Stores,<br />
+                      3, Nethaji Nagar,Mahalaxmi Nagar,<br />
+                      Pendurti,Andhra Pradesh 531173,India<br />
+                      <span className="font-bold text-green-950 mt-2 block">Contact: 8074643922</span>
                     </p>
                   </div>
                 </div>
@@ -60,8 +61,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg mb-1">Phone & WhatsApp</h3>
-                    <p className="text-muted-foreground mb-3">+91 98765 43210</p>
-                    <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">
+                    <p className="text-muted-foreground mb-3">+91 80746 43922</p>
+                    <a href="https://wa.me/918074643922" target="_blank" rel="noopener noreferrer">
                       <Button variant="outline" className="border-green-600 text-green-700 hover:bg-green-50">
                         <MessageCircle className="h-4 w-4 mr-2" /> Chat on WhatsApp
                       </Button>

@@ -65,11 +65,11 @@ export function Footer() {
             <ul className="space-y-4 text-sm text-primary-foreground/80">
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
-                <span>SKML Dry Fruits Boutique,<br/>Dwaraka Nagar,<br/>Visakhapatnam, AP 530016</span>
+                <span>SKML Dry Fruits & General Stores,<br />3, Nethaji Nagar,Mahalaxmi Nagar,<br />Pendurti,Andhra Pradesh 531173,India<br /></span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-secondary shrink-0" />
-                <span>+91 98765 43210</span>
+                <span>+91 80746 43922</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-secondary shrink-0" />
