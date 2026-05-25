@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import heroImage from "@/assets/products/hero-dryfruits.jpeg";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { PremiumFeatures } from "@/components/premium-features";

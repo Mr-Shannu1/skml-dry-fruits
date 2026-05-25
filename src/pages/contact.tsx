@@ -45,7 +45,7 @@ export default function Contact() {
                     <MapPin className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg mb-1">Our Boutique</h3>
+                    <h3 className="font-bold text-lg mb-1">Our Store</h3>
                     <p className="text-muted-foreground leading-relaxed">
                       SKML Dry Fruits & General Stores,<br />
                       3, Nethaji Nagar,Mahalaxmi Nagar,<br />
