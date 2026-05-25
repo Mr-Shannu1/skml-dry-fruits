@@ -301,22 +301,6 @@ Payment Status: PAID
 
               </div>
 
-              {/* Card Payment */}
-              <div className="mt-8">
-
-                <button
-                  onClick={() =>
-                    alert(
-                      "Debit/Credit card payments coming soon with Razorpay integration"
-                    )
-                  }
-                  className="w-full bg-black text-white py-4 rounded-2xl text-lg font-bold"
-                >
-                  Pay Using Debit/Credit Card
-                </button>
-
-              </div>
-
               {/* Order Button */}
               <button
                 onClick={placeOrder}
